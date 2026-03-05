@@ -1,0 +1,18 @@
+/*
+Theme Name: Gold Moment Tattoo Bali
+Theme URI: https://goldmomenttattoo.com
+Author: Gold Moment Tattoo Bali
+Author URI: https://goldmomenttattoo.com
+Description: A premium tattoo studio landing page theme for Gold Moment Tattoo Bali. Features hero section, tattoo portfolio carousel, gallery, booking form and more.
+Version: 1.0.0
+Requires at least: 5.8
+Tested up to: 6.4
+Requires PHP: 7.4
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: goldmoment-tattoo
+Tags: one-page, landing-page, tattoo, dark, gold, responsive, bootstrap
+*/
+
+/* Import custom styles */
+@import url('assets/css/custom.css');
