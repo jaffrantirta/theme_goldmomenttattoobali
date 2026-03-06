@@ -624,18 +624,13 @@ function goldmoment_customizer_register( WP_Customize_Manager $wp_customize ) {
     gm_textarea( $wp_customize, 'contact_page_subtitle',  'Subtitle Paragraph',  'gm_sec_ct_header',
         'Have a tattoo idea in mind? Reach out and our team will guide you through every step — from first sketch to final ink.', 40 );
 
-    /* 9-B: Contact Form ─────────────────────────────────────── */
-    $wp_customize->add_section( 'gm_sec_ct_form', [
-        'title'       => 'Contact Page — Form',
-        'panel'       => 'gm_panel_contact_page',
-        'description' => 'Customize the contact form heading and messages.',
+    /* 9-B: WhatsApp Button ──────────────────────────────────── */
+    $wp_customize->add_section( 'gm_sec_ct_wa', [
+        'title' => 'Contact Page — WhatsApp Button',
+        'panel' => 'gm_panel_contact_page',
     ] );
 
-    gm_text(     $wp_customize, 'contact_page_form_title',    'Form Heading',           'gm_sec_ct_form', 'Send Us a Message',                                                     10 );
-    gm_textarea( $wp_customize, 'contact_page_form_subtitle', 'Form Sub-text',          'gm_sec_ct_form', 'We reply within 24 hours. For faster response, chat with us on WhatsApp.', 20 );
-    gm_text(     $wp_customize, 'contact_page_wa_btn',        'WhatsApp Button Label',  'gm_sec_ct_form', 'Chat on WhatsApp',                                                       30 );
-    gm_textarea( $wp_customize, 'contact_page_success_msg',   'Success Message (after submit)', 'gm_sec_ct_form',
-        'Thank you! Your message has been sent. We\'ll get back to you within 24 hours.', 40 );
+    gm_text( $wp_customize, 'contact_page_wa_btn', 'WhatsApp Button Label', 'gm_sec_ct_wa', 'Chat on WhatsApp', 10 );
 
     /* 9-C: Note about shared fields ─────────────────────────── */
     $wp_customize->add_section( 'gm_sec_ct_note', [
