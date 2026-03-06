@@ -159,6 +159,52 @@ function goldmoment_handle_booking() {
 add_action( 'wp_ajax_goldmoment_booking',        'goldmoment_handle_booking' );
 add_action( 'wp_ajax_nopriv_goldmoment_booking', 'goldmoment_handle_booking' );
 
+/* ── AJAX Contact Form Handler ───────────────────────────── */
+function goldmoment_handle_contact() {
+    check_ajax_referer( 'goldmoment_contact', 'contact_nonce' );
+
+    $name    = sanitize_text_field(     $_POST['ct_name']    ?? '' );
+    $email   = sanitize_email(          $_POST['ct_email']   ?? '' );
+    $phone   = sanitize_text_field(     $_POST['ct_phone']   ?? '' );
+    $subject = sanitize_text_field(     $_POST['ct_subject'] ?? '' );
+    $message = sanitize_textarea_field( $_POST['ct_message'] ?? '' );
+
+    if ( empty( $name ) || empty( $email ) || empty( $message ) ) {
+        wp_send_json_error( [ 'message' => 'Please fill in your name, email and message.' ] );
+    }
+
+    if ( ! is_email( $email ) ) {
+        wp_send_json_error( [ 'message' => 'Please enter a valid email address.' ] );
+    }
+
+    $admin_email  = get_option( 'admin_email' );
+    $subject_line = 'Contact Form — ' . ( $subject ?: 'General Inquiry' ) . ' from ' . $name;
+    $body         = sprintf(
+        "New contact form submission:\n\nName: %s\nEmail: %s\nPhone: %s\nTopic: %s\n\nMessage:\n%s",
+        $name, $email, $phone ?: '—', $subject ?: '—', $message
+    );
+    $headers = [
+        'Content-Type: text/plain; charset=UTF-8',
+        'Reply-To: ' . $email,
+    ];
+
+    $sent = wp_mail( $admin_email, $subject_line, $body, $headers );
+
+    if ( $sent ) {
+        wp_mail(
+            $email,
+            'We received your message — Gold Moment Tattoo Bali',
+            "Hi {$name},\n\nThank you for contacting Gold Moment Tattoo Bali!\n\nWe have received your message and will get back to you within 24 hours.\n\nFor urgent inquiries reach us on Instagram: @goldmomenttattoo.bali\n\nWith love & ink,\nGold Moment Tattoo Bali Team",
+            [ 'Content-Type: text/plain; charset=UTF-8' ]
+        );
+        wp_send_json_success( [ 'message' => 'Thank you! Your message has been sent. We\'ll get back to you within 24 hours.' ] );
+    } else {
+        wp_send_json_error( [ 'message' => 'Something went wrong. Please try again or contact us directly.' ] );
+    }
+}
+add_action( 'wp_ajax_goldmoment_contact',        'goldmoment_handle_contact' );
+add_action( 'wp_ajax_nopriv_goldmoment_contact', 'goldmoment_handle_contact' );
+
 /* ── Bootstrap Nav Walker ────────────────────────────────── */
 class Goldmoment_Walker_Nav_Menu extends Walker_Nav_Menu {
 

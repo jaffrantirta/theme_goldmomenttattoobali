@@ -604,11 +604,53 @@ function goldmoment_customizer_register( WP_Customize_Manager $wp_customize ) {
 
 
     /* ──────────────────────────────────────────────────────────
-       PANEL 9 — FOOTER
+       PANEL 9 — CONTACT PAGE (page-contact.php template)
+    ────────────────────────────────────────────────────────── */
+    $wp_customize->add_panel( 'gm_panel_contact_page', [
+        'title'       => '⑨ Contact Page',
+        'description' => 'Settings for the Contact Us page (Template Name: Contact Us). Assign the "Contact Us" template to a page via Page Attributes. Contact details and hours are shared with the Find Us section on the homepage.',
+        'priority'    => 39,
+    ] );
+
+    /* 9-A: Page Header ──────────────────────────────────────── */
+    $wp_customize->add_section( 'gm_sec_ct_header', [
+        'title' => 'Contact Page — Header',
+        'panel' => 'gm_panel_contact_page',
+    ] );
+
+    gm_text(     $wp_customize, 'contact_page_badge',     'Badge Text',          'gm_sec_ct_header', 'Get In Touch',              10 );
+    gm_text(     $wp_customize, 'contact_page_title',     'Title — Normal Part', 'gm_sec_ct_header', 'Let\'s Create',             20 );
+    gm_text(     $wp_customize, 'contact_page_highlight', 'Title — Gold Part',   'gm_sec_ct_header', 'Something Together',        30 );
+    gm_textarea( $wp_customize, 'contact_page_subtitle',  'Subtitle Paragraph',  'gm_sec_ct_header',
+        'Have a tattoo idea in mind? Reach out and our team will guide you through every step — from first sketch to final ink.', 40 );
+
+    /* 9-B: Contact Form ─────────────────────────────────────── */
+    $wp_customize->add_section( 'gm_sec_ct_form', [
+        'title'       => 'Contact Page — Form',
+        'panel'       => 'gm_panel_contact_page',
+        'description' => 'Customize the contact form heading and messages.',
+    ] );
+
+    gm_text(     $wp_customize, 'contact_page_form_title',    'Form Heading',           'gm_sec_ct_form', 'Send Us a Message',                                                     10 );
+    gm_textarea( $wp_customize, 'contact_page_form_subtitle', 'Form Sub-text',          'gm_sec_ct_form', 'We reply within 24 hours. For faster response, chat with us on WhatsApp.', 20 );
+    gm_text(     $wp_customize, 'contact_page_wa_btn',        'WhatsApp Button Label',  'gm_sec_ct_form', 'Chat on WhatsApp',                                                       30 );
+    gm_textarea( $wp_customize, 'contact_page_success_msg',   'Success Message (after submit)', 'gm_sec_ct_form',
+        'Thank you! Your message has been sent. We\'ll get back to you within 24 hours.', 40 );
+
+    /* 9-C: Note about shared fields ─────────────────────────── */
+    $wp_customize->add_section( 'gm_sec_ct_note', [
+        'title'       => 'Contact Page — Address & Hours',
+        'panel'       => 'gm_panel_contact_page',
+        'description' => 'The address, phone, email, Instagram, WhatsApp URL, business hours, and Google Map shown on this page are shared with the homepage "Find Us" section. Edit them under: ⑦ Find Us Section → Contact Details / Business Hours / Google Map Embed, and ⑥ Book Now → WhatsApp Button → WhatsApp Link & Phone.',
+    ] );
+
+
+    /* ──────────────────────────────────────────────────────────
+       PANEL 10 — FOOTER
     ────────────────────────────────────────────────────────── */
     $wp_customize->add_panel( 'gm_panel_footer', [
-        'title'    => '⑨ Footer Section',
-        'priority' => 39,
+        'title'    => '⑩ Footer Section',
+        'priority' => 40,
     ] );
 
     /* 7-A: Brand Block ──────────────────────────────────────── */
