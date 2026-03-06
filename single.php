@@ -58,17 +58,14 @@ while ( have_posts() ) :
 
         <!-- Meta -->
         <div class="single-post-meta">
-            <?php echo get_avatar( get_the_author_meta( 'ID' ), 44, '', get_the_author(), [ 'class' => 'single-author-avatar' ] ); ?>
-            <div>
-                <div class="single-author-name"><?php the_author(); ?></div>
-                <div class="single-post-date">
-                    <time datetime="<?php echo esc_attr( get_the_date( 'c' ) ); ?>">
-                        <?php echo esc_html( get_the_date() ); ?>
-                    </time>
-                    <?php if ( get_the_modified_date() !== get_the_date() ) : ?>
-                    <span style="color:#555;"> &middot; Updated <?php echo esc_html( get_the_modified_date() ); ?></span>
-                    <?php endif; ?>
-                </div>
+            <div class="single-post-date">
+                <i class="fa-regular fa-calendar me-1 text-gold"></i>
+                <time datetime="<?php echo esc_attr( get_the_date( 'c' ) ); ?>">
+                    <?php echo esc_html( get_the_date( 'F j, Y' ) ); ?>
+                </time>
+                <?php if ( get_the_modified_date() !== get_the_date() ) : ?>
+                <span style="color:#555;"> &middot; Updated <?php echo esc_html( get_the_modified_date( 'F j, Y' ) ); ?></span>
+                <?php endif; ?>
             </div>
         </div>
 
@@ -142,19 +139,6 @@ while ( have_posts() ) :
                     </div>
                 </nav>
 
-                <!-- Author Bio -->
-                <?php
-                $author_bio = get_the_author_meta( 'description' );
-                if ( $author_bio ) :
-                ?>
-                <div class="single-author-bio reveal delay-2">
-                    <?php echo get_avatar( get_the_author_meta( 'ID' ), 72, '', get_the_author(), [ 'class' => 'single-bio-avatar' ] ); ?>
-                    <div>
-                        <div class="single-bio-name"><?php the_author(); ?></div>
-                        <p class="single-bio-text"><?php echo esc_html( $author_bio ); ?></p>
-                    </div>
-                </div>
-                <?php endif; ?>
 
                 <!-- Comments -->
                 <?php if ( comments_open() || get_comments_number() ) : ?>
@@ -308,26 +292,13 @@ if ( $related->have_posts() ) :
 .single-post-meta {
     display: flex;
     align-items: center;
-    gap: 14px;
-}
-.single-author-avatar {
-    width: 44px !important;
-    height: 44px !important;
-    border-radius: 50%;
-    border: 2px solid rgba(201,168,76,0.4);
-    object-fit: cover;
-}
-.single-author-name {
-    font-family: var(--font-heading);
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--white);
-    letter-spacing: 0.05em;
 }
 .single-post-date {
-    font-size: 11px;
+    font-size: 12px;
     color: var(--gray);
-    margin-top: 2px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
 }
 
 /* ── Content Section ────────────────────────────────────── */
@@ -475,39 +446,6 @@ if ( $related->have_posts() ) :
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-}
-
-/* ── Author Bio ─────────────────────────────────────────── */
-.single-author-bio {
-    display: flex;
-    gap: 20px;
-    align-items: flex-start;
-    padding: 28px;
-    background: var(--dark);
-    border: 1px solid rgba(201,168,76,0.12);
-    border-radius: var(--radius);
-    margin-bottom: 40px;
-}
-.single-bio-avatar {
-    width: 72px !important;
-    height: 72px !important;
-    border-radius: 50%;
-    border: 2px solid rgba(201,168,76,0.35);
-    object-fit: cover;
-    flex-shrink: 0;
-}
-.single-bio-name {
-    font-family: var(--font-heading);
-    font-size: 1rem;
-    color: var(--white);
-    letter-spacing: 0.06em;
-    margin-bottom: 6px;
-}
-.single-bio-text {
-    font-size: 0.875rem;
-    color: var(--gray);
-    line-height: 1.65;
-    margin: 0;
 }
 
 /* ── Comments ───────────────────────────────────────────── */
