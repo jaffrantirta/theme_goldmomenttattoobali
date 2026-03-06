@@ -382,8 +382,8 @@ p { color: #b0b0b0; }
 
 .hero-title {
   font-family: var(--font-display);
-  font-size: clamp(2.4rem, 7vw, 5.5rem);
-  line-height: 1.1;
+  font-size: clamp(1.9rem, 4.5vw, 3.6rem);
+  line-height: 1.15;
   color: var(--white);
   margin-bottom: 10px;
 }
@@ -1125,6 +1125,21 @@ p { color: #b0b0b0; }
   padding-top: 36px;
 }
 
+/* ── Process steps: proper 4-col / 2-col CSS grid ─────────── */
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  align-items: start;
+}
+
+@media (max-width: 767.98px) {
+  .steps-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px 12px;
+  }
+}
+
 /* ================================================================
    SECTION 7 — BOOK NOW
 ================================================================ */
@@ -1515,7 +1530,7 @@ select.form-control-custom option {
   .section-padding-sm { padding: 50px 0; }
 
   .hero-image-card { display: none; }
-  .hero-title      { font-size: clamp(2rem, 8vw, 3.5rem); }
+  .hero-title      { font-size: clamp(1.7rem, 6vw, 2.8rem); }
   .hero-desc       { font-size: 0.95rem; }
 
   /* Gallery: 2-col bento */
@@ -1580,7 +1595,7 @@ select.form-control-custom option {
 
   /* Hero */
   #hero { min-height: 100svh; }
-  .hero-title { font-size: clamp(1.8rem, 9vw, 2.8rem); }
+  .hero-title { font-size: clamp(1.6rem, 7.5vw, 2.4rem); }
   .hero-eyebrow { font-size: 9px; letter-spacing: 0.3em; }
   .hero-desc { font-size: 0.9rem; margin-bottom: 28px; }
   .hero-cta-group { margin-bottom: 36px; }

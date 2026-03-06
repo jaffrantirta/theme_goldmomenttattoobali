@@ -450,12 +450,11 @@ $social_fb  = get_theme_mod( 'social_facebook',  'https://www.facebook.com/goldm
             <p class="section-subtitle"><?php echo esc_html( $how_subtitle ); ?></p>
         </div>
 
-        <div class="row align-items-start">
+        <div class="steps-grid">
             <?php foreach ( $steps as $i => $step ) :
-                $is_last = $i === count( $steps ) - 1;
-                $delay   = 'delay-' . ( $i + 1 );
+                $delay = 'delay-' . ( $i + 1 );
             ?>
-            <div class="col-6 col-lg-3 reveal <?php echo esc_attr( $delay ); ?>">
+            <div class="reveal <?php echo esc_attr( $delay ); ?>">
                 <div class="step-card">
                     <div class="step-number-wrap">
                         <div class="step-circle"><?php echo esc_html( $step['num'] ); ?></div>
@@ -465,11 +464,6 @@ $social_fb  = get_theme_mod( 'social_facebook',  'https://www.facebook.com/goldm
                     <p class="step-text"><?php echo esc_html( $step['text'] ); ?></p>
                 </div>
             </div>
-            <?php if ( ! $is_last ) : ?>
-            <div class="col-lg-auto d-none d-lg-flex step-arrow reveal <?php echo esc_attr( $delay ); ?>">
-                <i class="fa-solid fa-chevron-right"></i>
-            </div>
-            <?php endif; ?>
             <?php endforeach; ?>
         </div>
 
