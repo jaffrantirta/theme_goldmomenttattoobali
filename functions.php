@@ -159,6 +159,44 @@ function goldmoment_handle_booking() {
 add_action( 'wp_ajax_goldmoment_booking',        'goldmoment_handle_booking' );
 add_action( 'wp_ajax_nopriv_goldmoment_booking', 'goldmoment_handle_booking' );
 
+/* ── Bootstrap Nav Walker ────────────────────────────────── */
+class Goldmoment_Walker_Nav_Menu extends Walker_Nav_Menu {
+
+    public function start_el( &$output, $item, $depth = 0, $args = null, $id = 0 ) {
+        $classes   = empty( $item->classes ) ? [] : (array) $item->classes;
+        $classes[] = 'nav-item';
+
+        $class_names = implode( ' ', apply_filters( 'nav_menu_css_class', array_filter( $classes ), $item, $args, $depth ) );
+        $output     .= '<li class="' . esc_attr( $class_names ) . '">';
+
+        $atts          = [];
+        $atts['href']  = ! empty( $item->url ) ? $item->url : '#';
+        $atts['class'] = 'nav-link';
+
+        if ( $item->current || $item->current_item_ancestor ) {
+            $atts['class']        .= ' active';
+            $atts['aria-current']  = 'page';
+        }
+
+        $atts = apply_filters( 'nav_menu_link_attributes', $atts, $item, $args, $depth );
+
+        $attrs = '';
+        foreach ( $atts as $attr => $val ) {
+            if ( '' !== $val ) {
+                $val    = 'href' === $attr ? esc_url( $val ) : esc_attr( $val );
+                $attrs .= ' ' . $attr . '="' . $val . '"';
+            }
+        }
+
+        $title   = apply_filters( 'the_title', $item->title, $item->ID );
+        $output .= '<a' . $attrs . '>' . $title . '</a>';
+    }
+
+    public function end_el( &$output, $item, $depth = 0, $args = null ) {
+        $output .= '</li>';
+    }
+}
+
 /* ── Excerpt ─────────────────────────────────────────────── */
 function goldmoment_excerpt_length( $_length ) { return 25; }
 add_filter( 'excerpt_length', 'goldmoment_excerpt_length' );

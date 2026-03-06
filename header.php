@@ -44,31 +44,26 @@
 
         <!-- Nav Links -->
         <div class="collapse navbar-collapse" id="navbarMenu">
-            <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-1">
-                <li class="nav-item">
-                    <a class="nav-link active" href="#hero">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#tattoo-carousel">Portfolio</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#why-us">Why Us</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#gallery">Gallery</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#how-it-works">Process</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="<?php echo esc_url( get_permalink( get_option( 'page_for_posts' ) ) ?: home_url( '/blog' ) ); ?>">Blog</a>
-                </li>
-                <li class="nav-item ms-lg-3">
+            <div class="ms-auto d-flex flex-column flex-lg-row align-items-lg-center gap-lg-1">
+
+                <?php
+                wp_nav_menu( [
+                    'theme_location' => 'primary',
+                    'menu_class'     => 'navbar-nav d-flex flex-column flex-lg-row align-items-lg-center gap-lg-1',
+                    'container'      => false,
+                    'walker'         => new Goldmoment_Walker_Nav_Menu(),
+                    'fallback_cb'    => '__return_false',
+                ] );
+                ?>
+
+                <!-- Book Now CTA — always visible regardless of menu -->
+                <div class="ms-lg-3 mt-3 mt-lg-0">
                     <a class="btn-gold btn-gold-sm" href="#book-now" style="font-size:11px; padding:10px 22px; border-radius:3px;">
                         <i class="fa-solid fa-calendar-check me-1"></i> Book Now
                     </a>
-                </li>
-            </ul>
+                </div>
+
+            </div>
         </div>
     </div>
 </nav>
