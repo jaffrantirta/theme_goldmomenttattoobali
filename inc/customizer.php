@@ -449,10 +449,10 @@ function goldmoment_customizer_register( WP_Customize_Manager $wp_customize ) {
 
 
     /* ──────────────────────────────────────────────────────────
-       PANEL 6 — BOOK NOW / CONTACT
+       PANEL 6 — BOOK NOW (WhatsApp CTA)
     ────────────────────────────────────────────────────────── */
     $wp_customize->add_panel( 'gm_panel_book', [
-        'title'    => '⑥ Book Now / Contact',
+        'title'    => '⑥ Book Now',
         'priority' => 36,
     ] );
 
@@ -462,55 +462,86 @@ function goldmoment_customizer_register( WP_Customize_Manager $wp_customize ) {
         'panel' => 'gm_panel_book',
     ] );
 
-    gm_text( $wp_customize, 'book_badge',           'Badge Text',          'gm_sec_book_header', 'Book Now',              10 );
-    gm_text( $wp_customize, 'book_title',           'Title — Normal Part', 'gm_sec_book_header', 'Reserve Your',          20 );
-    gm_text( $wp_customize, 'book_title_highlight', 'Title — Gold Part',   'gm_sec_book_header', 'Gold Moment',           30 );
-    gm_textarea( $wp_customize, 'book_subtitle',    'Subtitle Paragraph',  'gm_sec_book_header',
-        'Your forever ink is just one form away. Fill in the details below and our team will get back to you within 24 hours.', 40 );
+    gm_text(     $wp_customize, 'book_badge',           'Badge Text',          'gm_sec_book_header', 'Book Now',       10 );
+    gm_text(     $wp_customize, 'book_title',           'Title — Normal Part', 'gm_sec_book_header', 'Reserve Your',   20 );
+    gm_text(     $wp_customize, 'book_title_highlight', 'Title — Gold Part',   'gm_sec_book_header', 'Gold Moment',    30 );
+    gm_textarea( $wp_customize, 'book_subtitle',        'Subtitle Paragraph',  'gm_sec_book_header',
+        'Ready to wear your story? Chat with us on WhatsApp and our team will help you plan your perfect tattoo.', 40 );
 
-    /* 6-B: Contact Details ──────────────────────────────────── */
-    $wp_customize->add_section( 'gm_sec_book_contact', [
-        'title' => 'Book Now — Contact Details',
-        'panel' => 'gm_panel_book',
-    ] );
-
-    gm_textarea( $wp_customize, 'contact_address',   'Studio Address',        'gm_sec_book_contact', "Jl. Kayu Aya No. 88\nSeminyak, Kuta, Bali 80361", 10 );
-    gm_text(     $wp_customize, 'contact_phone',     'WhatsApp / Phone',      'gm_sec_book_contact', '+62 812 3456 7890',                                  20 );
-    gm_url(      $wp_customize, 'contact_wa_url',    'WhatsApp Link (wa.me)', 'gm_sec_book_contact', 'https://wa.me/6281234567890',                         30 );
-    gm_text(     $wp_customize, 'contact_instagram', 'Instagram Handle',      'gm_sec_book_contact', '@goldmomenttattoo.bali',                              40 );
-    gm_url(      $wp_customize, 'contact_ig_url',    'Instagram Profile URL', 'gm_sec_book_contact', 'https://www.instagram.com/goldmomenttattoo.bali',     50 );
-    gm_text(     $wp_customize, 'contact_email',     'Email Address',         'gm_sec_book_contact', 'hello@goldmomenttattoo.com',                          60 );
-
-    /* 6-C: Studio Hours ─────────────────────────────────────── */
-    $wp_customize->add_section( 'gm_sec_book_hours', [
-        'title' => 'Book Now — Studio Hours',
-        'panel' => 'gm_panel_book',
-    ] );
-
-    gm_text( $wp_customize, 'hours_weekday',      'Monday – Friday Hours', 'gm_sec_book_hours', '10:00 – 20:00',         10 );
-    gm_text( $wp_customize, 'hours_saturday',     'Saturday Hours',        'gm_sec_book_hours', '09:00 – 21:00',         20 );
-    gm_text( $wp_customize, 'hours_sunday',       'Sunday Hours',          'gm_sec_book_hours', 'By Appointment Only',   30 );
-    gm_text( $wp_customize, 'hours_label_footer', 'Hours Subtext (note)',  'gm_sec_book_hours', 'Sunday: By Appointment Only', 40 );
-
-    /* 6-D: Map Embed ────────────────────────────────────────── */
-    $wp_customize->add_section( 'gm_sec_book_map', [
-        'title'       => 'Book Now — Google Map',
+    /* 6-B: WhatsApp CTA Button ──────────────────────────────── */
+    $wp_customize->add_section( 'gm_sec_book_wa', [
+        'title'       => 'Book Now — WhatsApp Button',
         'panel'       => 'gm_panel_book',
-        'description' => 'Paste your Google Maps embed URL here. Get it from Google Maps → Share → Embed a map → copy the src URL.',
+        'description' => 'Customize the large WhatsApp CTA button.',
     ] );
 
-    gm_url( $wp_customize, 'map_embed_url', 'Google Maps Embed URL', 'gm_sec_book_map',
+    gm_text( $wp_customize, 'book_wa_btn_text', 'Button Label',          'gm_sec_book_wa', 'Chat on WhatsApp',                          10 );
+    gm_text( $wp_customize, 'book_wa_btn_sub',  'Sub-text below button', 'gm_sec_book_wa', 'Usually replies within 1 hour · Free consultation', 20 );
+    gm_url(  $wp_customize, 'contact_wa_url',   'WhatsApp Link (wa.me)', 'gm_sec_book_wa', 'https://wa.me/6281234567890',                30,
+        'Format: https://wa.me/628xxxxxxxxxx' );
+    gm_text( $wp_customize, 'contact_phone',    'Phone Number (display)','gm_sec_book_wa', '+62 812 3456 7890',                         40 );
+
+
+    /* ──────────────────────────────────────────────────────────
+       PANEL 7 — FIND US
+    ────────────────────────────────────────────────────────── */
+    $wp_customize->add_panel( 'gm_panel_findus', [
+        'title'    => '⑦ Find Us Section',
+        'priority' => 37,
+    ] );
+
+    /* 7-A: Section Header ───────────────────────────────────── */
+    $wp_customize->add_section( 'gm_sec_findus_header', [
+        'title' => 'Find Us — Section Header',
+        'panel' => 'gm_panel_findus',
+    ] );
+
+    gm_text(     $wp_customize, 'findus_badge',           'Badge Text',          'gm_sec_findus_header', 'Find Us',         10 );
+    gm_text(     $wp_customize, 'findus_title',           'Title — Normal Part', 'gm_sec_findus_header', 'Visit Our',       20 );
+    gm_text(     $wp_customize, 'findus_title_highlight', 'Title — Gold Part',   'gm_sec_findus_header', 'Studio',          30 );
+    gm_textarea( $wp_customize, 'findus_subtitle',        'Subtitle Paragraph',  'gm_sec_findus_header',
+        'We\'re located in the heart of Seminyak, Bali. Come visit us or reach out through any channel below.', 40 );
+
+    /* 7-B: Contact Details ──────────────────────────────────── */
+    $wp_customize->add_section( 'gm_sec_findus_contact', [
+        'title' => 'Find Us — Contact Details',
+        'panel' => 'gm_panel_findus',
+    ] );
+
+    gm_textarea( $wp_customize, 'contact_address',   'Studio Address',        'gm_sec_findus_contact', "Jl. Kayu Aya No. 88\nSeminyak, Kuta, Bali 80361", 10 );
+    gm_text(     $wp_customize, 'contact_instagram', 'Instagram Handle',      'gm_sec_findus_contact', '@goldmomenttattoo.bali',                             20 );
+    gm_url(      $wp_customize, 'contact_ig_url',    'Instagram Profile URL', 'gm_sec_findus_contact', 'https://www.instagram.com/goldmomenttattoo.bali',    30 );
+    gm_text(     $wp_customize, 'contact_email',     'Email Address',         'gm_sec_findus_contact', 'hello@goldmomenttattoo.com',                         40 );
+
+    /* 7-C: Business Hours ───────────────────────────────────── */
+    $wp_customize->add_section( 'gm_sec_findus_hours', [
+        'title' => 'Find Us — Business Hours',
+        'panel' => 'gm_panel_findus',
+    ] );
+
+    gm_text( $wp_customize, 'hours_weekday',  'Monday – Friday Hours', 'gm_sec_findus_hours', '10:00 – 20:00',       10 );
+    gm_text( $wp_customize, 'hours_saturday', 'Saturday Hours',        'gm_sec_findus_hours', '09:00 – 21:00',       20 );
+    gm_text( $wp_customize, 'hours_sunday',   'Sunday Hours',          'gm_sec_findus_hours', 'By Appointment Only', 30 );
+
+    /* 7-D: Google Map ───────────────────────────────────────── */
+    $wp_customize->add_section( 'gm_sec_findus_map', [
+        'title'       => 'Find Us — Google Map Embed',
+        'panel'       => 'gm_panel_findus',
+        'description' => 'Go to Google Maps → your location → Share → Embed a map → copy the src="..." URL and paste it here.',
+    ] );
+
+    gm_url( $wp_customize, 'map_embed_url', 'Google Maps Embed URL', 'gm_sec_findus_map',
         'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3944.5623!2d115.1625!3d-8.6895!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zOMKwNDEnMjIuMiJTIDExNcKwMDknNDUuMCJF!5e0!3m2!1sen!2sid!4v1234567890',
-        10, 'Paste the full embed URL from Google Maps'
+        10, 'Paste the full embed src URL from Google Maps'
     );
 
 
     /* ──────────────────────────────────────────────────────────
-       PANEL 7 — FOOTER
+       PANEL 8 — FOOTER
     ────────────────────────────────────────────────────────── */
     $wp_customize->add_panel( 'gm_panel_footer', [
-        'title'    => '⑦ Footer Section',
-        'priority' => 37,
+        'title'    => '⑧ Footer Section',
+        'priority' => 38,
     ] );
 
     /* 7-A: Brand Block ──────────────────────────────────────── */

@@ -141,11 +141,19 @@ foreach ( $step_defaults as $n => $def ) {
     ];
 }
 
-// ── Book Now / Contact ────────────────────────────────────────
+// ── Book Now ───────────────────────────────────────────────────
 $book_badge     = get_theme_mod( 'book_badge',           'Book Now' );
 $book_title     = get_theme_mod( 'book_title',           'Reserve Your' );
 $book_highlight = get_theme_mod( 'book_title_highlight', 'Gold Moment' );
-$book_subtitle  = get_theme_mod( 'book_subtitle',        'Your forever ink is just one form away. Fill in the details below and our team will get back to you within 24 hours.' );
+$book_subtitle  = get_theme_mod( 'book_subtitle',        'Ready to wear your story? Chat with us on WhatsApp and our team will help you plan your perfect tattoo.' );
+$book_wa_text   = get_theme_mod( 'book_wa_btn_text',     'Chat on WhatsApp' );
+$book_wa_sub    = get_theme_mod( 'book_wa_btn_sub',      'Usually replies within 1 hour · Free consultation' );
+
+// ── Find Us ────────────────────────────────────────────────────
+$findus_badge     = get_theme_mod( 'findus_badge',           'Find Us' );
+$findus_title     = get_theme_mod( 'findus_title',           'Visit Our' );
+$findus_highlight = get_theme_mod( 'findus_title_highlight', 'Studio' );
+$findus_subtitle  = get_theme_mod( 'findus_subtitle',        'We\'re located in the heart of Seminyak, Bali. Come visit us or reach out through any channel below.' );
 
 $contact_address   = get_theme_mod( 'contact_address',   "Jl. Kayu Aya No. 88\nSeminyak, Kuta, Bali 80361" );
 $contact_phone     = get_theme_mod( 'contact_phone',     '+62 812 3456 7890' );
@@ -494,205 +502,328 @@ $social_fb  = get_theme_mod( 'social_facebook',  'https://www.facebook.com/goldm
 
 
 <!-- ============================================================
-     SECTION 6 — BOOK NOW
+     SECTION 6 — BOOK NOW (WhatsApp CTA)
 ============================================================ -->
-<section id="book-now" class="section-padding" aria-label="Book Appointment">
+<section id="book-now" class="section-padding book-now-section" aria-label="Book Appointment">
     <div class="book-bg-deco"></div>
-    <div class="container position-relative">
+    <div class="container position-relative text-center">
 
-        <div class="text-center mb-5 reveal">
+        <div class="reveal">
             <span class="section-badge"><?php echo esc_html( $book_badge ); ?></span>
             <h2 class="section-title mt-2">
                 <?php echo esc_html( $book_title ); ?> <span><?php echo esc_html( $book_highlight ); ?></span>
             </h2>
             <div class="gold-divider"></div>
-            <p class="section-subtitle"><?php echo esc_html( $book_subtitle ); ?></p>
+            <p class="section-subtitle mb-5"><?php echo esc_html( $book_subtitle ); ?></p>
         </div>
 
-        <div class="row g-4 align-items-start">
-
-            <!-- Contact Info Card -->
-            <div class="col-lg-4 reveal-left delay-1">
-                <div class="book-info-card">
-
-                    <h3 class="footer-heading mb-4">Find Us</h3>
-
-                    <div class="book-contact-item">
-                        <div class="book-contact-icon"><i class="fa-solid fa-location-dot"></i></div>
-                        <div>
-                            <div class="book-contact-label">Studio Address</div>
-                            <div class="book-contact-value"><?php echo nl2br( esc_html( $contact_address ) ); ?></div>
-                        </div>
-                    </div>
-
-                    <div class="book-contact-item">
-                        <div class="book-contact-icon"><i class="fa-brands fa-whatsapp"></i></div>
-                        <div>
-                            <div class="book-contact-label">WhatsApp</div>
-                            <a href="<?php echo esc_url( $contact_wa_url ); ?>" class="book-contact-value" style="color:var(--white);">
-                                <?php echo esc_html( $contact_phone ); ?>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="book-contact-item">
-                        <div class="book-contact-icon"><i class="fa-brands fa-instagram"></i></div>
-                        <div>
-                            <div class="book-contact-label">Instagram</div>
-                            <a href="<?php echo esc_url( $contact_ig_url ); ?>"
-                               target="_blank" rel="noopener noreferrer"
-                               class="book-contact-value" style="color:var(--white);">
-                                <?php echo esc_html( $contact_instagram ); ?>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="book-contact-item">
-                        <div class="book-contact-icon"><i class="fa-solid fa-envelope"></i></div>
-                        <div>
-                            <div class="book-contact-label">Email</div>
-                            <a href="mailto:<?php echo esc_attr( $contact_email ); ?>"
-                               class="book-contact-value" style="color:var(--white);">
-                                <?php echo esc_html( $contact_email ); ?>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="book-contact-item">
-                        <div class="book-contact-icon"><i class="fa-regular fa-clock"></i></div>
-                        <div>
-                            <div class="book-contact-label">Studio Hours</div>
-                            <div class="book-contact-value">
-                                Mon – Fri: <?php echo esc_html( $hours_weekday ); ?><br>
-                                Sat: <?php echo esc_html( $hours_sat ); ?><br>
-                                <span style="color:var(--gray);font-size:12px;">
-                                    Sun: <?php echo esc_html( $hours_sun ); ?>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="d-flex gap-2 mt-4">
-                        <a href="<?php echo esc_url( $social_ig ); ?>" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-                        <a href="<?php echo esc_url( $social_wa ); ?>" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
-                        <a href="<?php echo esc_url( $social_tt ); ?>" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
-                        <a href="<?php echo esc_url( $social_fb ); ?>" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-                    </div>
-
-                </div>
-            </div>
-
-            <!-- Booking Form -->
-            <div class="col-lg-8 reveal-right delay-2">
-                <div class="form-card">
-
-                    <h3 class="footer-heading mb-4">Booking Request</h3>
-
-                    <form id="bookingForm" novalidate>
-                        <?php wp_nonce_field( 'goldmoment_booking', 'booking_nonce' ); ?>
-
-                        <div class="row g-3">
-
-                            <div class="col-sm-6 form-mb">
-                                <label class="form-label-custom" for="booking-name">Full Name <span class="text-gold">*</span></label>
-                                <input type="text" id="booking-name" name="name" class="form-control-custom" placeholder="Your full name" required autocomplete="name">
-                            </div>
-
-                            <div class="col-sm-6 form-mb">
-                                <label class="form-label-custom" for="booking-email">Email Address <span class="text-gold">*</span></label>
-                                <input type="email" id="booking-email" name="email" class="form-control-custom" placeholder="your@email.com" required autocomplete="email">
-                            </div>
-
-                            <div class="col-sm-6 form-mb">
-                                <label class="form-label-custom" for="booking-phone">Phone / WhatsApp</label>
-                                <input type="tel" id="booking-phone" name="phone" class="form-control-custom" placeholder="+62 812 xxxx xxxx" autocomplete="tel">
-                            </div>
-
-                            <div class="col-sm-6 form-mb">
-                                <label class="form-label-custom" for="booking-style">Tattoo Style</label>
-                                <select id="booking-style" name="style" class="form-control-custom">
-                                    <option value="" disabled selected>Select a style...</option>
-                                    <option value="japanese">Japanese / Irezumi</option>
-                                    <option value="blackwork">Blackwork</option>
-                                    <option value="realism">Realism / Portrait</option>
-                                    <option value="fineline">Fine Line</option>
-                                    <option value="geometric">Geometric / Dotwork</option>
-                                    <option value="watercolor">Watercolor</option>
-                                    <option value="neotraditional">Neo-Traditional</option>
-                                    <option value="tribal">Tribal / Balinese</option>
-                                    <option value="custom">Custom / Not Sure Yet</option>
-                                </select>
-                            </div>
-
-                            <div class="col-sm-6 form-mb">
-                                <label class="form-label-custom" for="booking-date">Preferred Date</label>
-                                <input type="date" id="booking-date" name="date" class="form-control-custom">
-                            </div>
-
-                            <div class="col-sm-6 form-mb">
-                                <label class="form-label-custom" for="booking-size">Tattoo Size</label>
-                                <select id="booking-size" name="size" class="form-control-custom">
-                                    <option value="" disabled selected>Select size...</option>
-                                    <option value="small">Small (palm-sized)</option>
-                                    <option value="medium">Medium (half-sleeve)</option>
-                                    <option value="large">Large (full sleeve)</option>
-                                    <option value="xlarge">X-Large (back/chest)</option>
-                                    <option value="unsure">Not sure yet</option>
-                                </select>
-                            </div>
-
-                            <div class="col-12 form-mb">
-                                <label class="form-label-custom" for="booking-message">Tell Us About Your Vision</label>
-                                <textarea id="booking-message" name="message" class="form-control-custom" rows="4"
-                                          placeholder="Describe your tattoo idea, placement, reference images you have in mind..."></textarea>
-                            </div>
-
-                            <div class="col-12">
-                                <div class="d-flex align-items-center gap-2 mb-3">
-                                    <input type="checkbox" id="agree-terms"
-                                           style="accent-color:var(--gold);width:16px;height:16px;cursor:pointer;" required>
-                                    <label for="agree-terms" style="font-size:12px;color:var(--gray);cursor:pointer;">
-                                        I agree to the <a href="#" class="text-gold">Terms &amp; Conditions</a>
-                                        and understand bookings require a deposit.
-                                    </label>
-                                </div>
-
-                                <button type="submit" class="btn-gold w-100 justify-content-center" id="submitBtn">
-                                    <i class="fa-solid fa-paper-plane"></i>
-                                    Send Booking Request
-                                </button>
-
-                                <div id="form-message" role="alert"></div>
-
-                                <p class="text-center mt-3" style="font-size:12px;color:var(--gray);">
-                                    <i class="fa-solid fa-lock me-1 text-gold" style="font-size:10px;"></i>
-                                    Your information is secure and will never be shared.
-                                </p>
-                            </div>
-
-                        </div>
-                    </form>
-
-                </div>
-            </div>
-
+        <!-- WhatsApp CTA -->
+        <div class="book-wa-wrap reveal delay-1">
+            <a href="<?php echo esc_url( $contact_wa_url ); ?>"
+               target="_blank" rel="noopener noreferrer"
+               class="book-wa-btn">
+                <span class="book-wa-icon-wrap">
+                    <i class="fa-brands fa-whatsapp"></i>
+                </span>
+                <span class="book-wa-label"><?php echo esc_html( $book_wa_text ); ?></span>
+            </a>
+            <p class="book-wa-sub"><?php echo esc_html( $book_wa_sub ); ?></p>
         </div>
 
-        <!-- Map -->
-        <div class="mt-4 reveal delay-3">
-            <div class="rounded-3 overflow-hidden" style="border:1px solid rgba(201,168,76,0.15);">
-                <iframe
-                    src="<?php echo esc_url( $map_url ); ?>"
-                    width="100%" height="280"
-                    style="border:0;filter:grayscale(100%) invert(90%) contrast(90%);display:block;"
-                    allowfullscreen="" loading="lazy"
-                    referrerpolicy="no-referrer-when-downgrade"
-                    title="Gold Moment Tattoo Bali location map">
-                </iframe>
+        <!-- Trust Badges -->
+        <div class="d-flex flex-wrap justify-content-center gap-3 mt-5 reveal delay-2">
+            <?php
+            $badges = [
+                [ 'fa-solid fa-shield-halved', 'Safe & Sterile'      ],
+                [ 'fa-solid fa-pen-nib',        'Custom Designs'      ],
+                [ 'fa-solid fa-star',            'Award-Winning'       ],
+                [ 'fa-solid fa-heart',           'Free Consultation'   ],
+            ];
+            foreach ( $badges as $b ) : ?>
+            <div class="book-trust-badge">
+                <i class="<?php echo esc_attr( $b[0] ); ?>"></i>
+                <?php echo esc_html( $b[1] ); ?>
             </div>
+            <?php endforeach; ?>
         </div>
 
     </div>
 </section>
+
+
+<!-- ============================================================
+     SECTION 7 — FIND US
+============================================================ -->
+<section id="find-us" class="find-us-section" aria-label="Find Us">
+
+    <!-- Map (full-width) -->
+    <div class="find-us-map reveal">
+        <iframe
+            src="<?php echo esc_url( $map_url ); ?>"
+            width="100%"
+            height="420"
+            style="border:0; display:block; filter:grayscale(80%) contrast(1.1);"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Gold Moment Tattoo Bali location map">
+        </iframe>
+        <div class="find-us-map-overlay"></div>
+    </div>
+
+    <!-- Info Grid -->
+    <div class="container">
+
+        <div class="text-center pt-5 pb-4 reveal">
+            <span class="section-badge"><?php echo esc_html( $findus_badge ); ?></span>
+            <h2 class="section-title mt-2">
+                <?php echo esc_html( $findus_title ); ?> <span><?php echo esc_html( $findus_highlight ); ?></span>
+            </h2>
+            <div class="gold-divider"></div>
+            <p class="section-subtitle"><?php echo esc_html( $findus_subtitle ); ?></p>
+        </div>
+
+        <div class="find-us-grid reveal delay-1">
+
+            <!-- Address -->
+            <div class="find-us-card">
+                <div class="find-us-card-icon">
+                    <i class="fa-solid fa-location-dot"></i>
+                </div>
+                <div class="find-us-card-label">Studio Address</div>
+                <div class="find-us-card-value"><?php echo nl2br( esc_html( $contact_address ) ); ?></div>
+                <a href="https://www.google.com/maps/search/?api=1&query=<?php echo urlencode( $contact_address ); ?>"
+                   target="_blank" rel="noopener noreferrer"
+                   class="find-us-card-link">
+                    Get Directions <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </a>
+            </div>
+
+            <!-- Instagram -->
+            <div class="find-us-card">
+                <div class="find-us-card-icon">
+                    <i class="fa-brands fa-instagram"></i>
+                </div>
+                <div class="find-us-card-label">Instagram</div>
+                <div class="find-us-card-value"><?php echo esc_html( $contact_instagram ); ?></div>
+                <a href="<?php echo esc_url( $contact_ig_url ); ?>"
+                   target="_blank" rel="noopener noreferrer"
+                   class="find-us-card-link">
+                    Follow Us <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </a>
+            </div>
+
+            <!-- Email -->
+            <div class="find-us-card">
+                <div class="find-us-card-icon">
+                    <i class="fa-solid fa-envelope"></i>
+                </div>
+                <div class="find-us-card-label">Email Us</div>
+                <div class="find-us-card-value"><?php echo esc_html( $contact_email ); ?></div>
+                <a href="mailto:<?php echo esc_attr( $contact_email ); ?>"
+                   class="find-us-card-link">
+                    Send Email <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </a>
+            </div>
+
+            <!-- Business Hours -->
+            <div class="find-us-card">
+                <div class="find-us-card-icon">
+                    <i class="fa-regular fa-clock"></i>
+                </div>
+                <div class="find-us-card-label">Business Hours</div>
+                <div class="find-us-card-value find-us-hours">
+                    <div class="find-us-hour-row">
+                        <span>Mon – Fri</span>
+                        <span class="text-gold"><?php echo esc_html( $hours_weekday ); ?></span>
+                    </div>
+                    <div class="find-us-hour-row">
+                        <span>Saturday</span>
+                        <span class="text-gold"><?php echo esc_html( $hours_sat ); ?></span>
+                    </div>
+                    <div class="find-us-hour-row">
+                        <span>Sunday</span>
+                        <span style="color:#555;"><?php echo esc_html( $hours_sun ); ?></span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- WhatsApp shortcut at bottom -->
+        <div class="text-center pb-5 mt-4 reveal delay-2">
+            <a href="<?php echo esc_url( $contact_wa_url ); ?>"
+               target="_blank" rel="noopener noreferrer"
+               class="btn-gold">
+                <i class="fa-brands fa-whatsapp"></i>
+                <?php echo esc_html( $book_wa_text ); ?>
+            </a>
+        </div>
+
+    </div>
+</section>
+
+<!-- Book Now & Find Us Styles -->
+<style>
+/* ── Book Now ───────────────────────────────────────────── */
+.book-now-section { background: var(--black); position: relative; overflow: hidden; }
+.book-now-section::before {
+    content: '';
+    position: absolute;
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(201,168,76,0.07) 0%, transparent 70%);
+    top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+    pointer-events: none;
+}
+
+/* WA Button */
+.book-wa-wrap { display: flex; flex-direction: column; align-items: center; }
+.book-wa-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 16px;
+    background: #25D366;
+    color: #fff !important;
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 1.1rem;
+    letter-spacing: 0.06em;
+    padding: 18px 44px;
+    border-radius: 60px;
+    text-decoration: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 8px 32px rgba(37,211,102,0.3);
+    position: relative;
+}
+.book-wa-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 16px 48px rgba(37,211,102,0.45);
+    color: #fff !important;
+}
+.book-wa-btn::before {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    border-radius: 63px;
+    background: linear-gradient(135deg, rgba(37,211,102,0.4), rgba(37,211,102,0));
+    filter: blur(10px);
+    z-index: -1;
+}
+.book-wa-icon-wrap {
+    display: flex; align-items: center; justify-content: center;
+    width: 42px; height: 42px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 50%;
+    font-size: 1.4rem;
+    flex-shrink: 0;
+}
+.book-wa-label { font-size: 1rem; }
+.book-wa-sub {
+    margin-top: 14px;
+    font-size: 12px;
+    color: #555;
+    letter-spacing: 0.05em;
+}
+.book-trust-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #666;
+    padding: 8px 18px;
+    border: 1px solid rgba(201,168,76,0.1);
+    border-radius: 30px;
+}
+.book-trust-badge i { color: var(--gold); font-size: 12px; }
+
+/* ── Find Us ────────────────────────────────────────────── */
+.find-us-section { background: var(--black); }
+
+/* Map */
+.find-us-map { position: relative; overflow: hidden; }
+.find-us-map-overlay {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 120px;
+    background: linear-gradient(to top, var(--black), transparent);
+    pointer-events: none;
+}
+
+/* Info Grid */
+.find-us-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-bottom: 0;
+}
+@media (max-width: 991px) { .find-us-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 575px)  { .find-us-grid { grid-template-columns: 1fr; } }
+
+.find-us-card {
+    background: var(--dark);
+    border: 1px solid rgba(201,168,76,0.1);
+    border-radius: var(--radius);
+    padding: 28px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    transition: border-color 0.3s, transform 0.3s;
+}
+.find-us-card:hover {
+    border-color: rgba(201,168,76,0.3);
+    transform: translateY(-3px);
+}
+.find-us-card-icon {
+    width: 44px; height: 44px;
+    border-radius: 10px;
+    background: rgba(201,168,76,0.1);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--gold);
+    font-size: 1.1rem;
+    margin-bottom: 4px;
+}
+.find-us-card-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+}
+.find-us-card-value {
+    font-size: 0.875rem;
+    color: #bbb;
+    line-height: 1.65;
+    flex: 1;
+}
+.find-us-card-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-top: 4px;
+    transition: gap 0.25s ease;
+}
+.find-us-card:hover .find-us-card-link { gap: 8px; }
+.find-us-card-link i { font-size: 9px; }
+
+/* Hours table */
+.find-us-hours { display: flex; flex-direction: column; gap: 6px; }
+.find-us-hour-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    gap: 8px;
+}
+.find-us-hour-row span:first-child { color: #666; }
+</style>
 
 <?php get_footer(); ?>
