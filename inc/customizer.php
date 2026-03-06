@@ -106,6 +106,34 @@ function gm_heading( $c, $id, $label, $section, $priority = 10 ) {
 function goldmoment_customizer_register( WP_Customize_Manager $wp_customize ) {
 
     /* ──────────────────────────────────────────────────────────
+       SECTION — NAVBAR CTA BUTTON
+    ────────────────────────────────────────────────────────── */
+    $wp_customize->add_section( 'gm_sec_navbar_cta', [
+        'title'       => '🔘 Navbar CTA Button',
+        'description' => 'Customize the "Book Now" button shown in the top navigation bar.',
+        'priority'    => 25,
+    ] );
+
+    gm_text( $wp_customize, 'navbar_cta_text', 'Button Label',          'gm_sec_navbar_cta', 'Book Now',                    10 );
+    gm_url(  $wp_customize, 'navbar_cta_url',  'Button Link URL',       'gm_sec_navbar_cta', '#book-now',                   20 );
+    gm_text( $wp_customize, 'navbar_cta_icon', 'Icon (Font Awesome class)', 'gm_sec_navbar_cta', 'fa-solid fa-calendar-check',
+        30, 'e.g. fa-solid fa-calendar-check — leave blank to hide icon' );
+
+    // Show / hide the button
+    $wp_customize->add_setting( 'navbar_cta_show', [
+        'default'           => '1',
+        'sanitize_callback' => 'absint',
+        'transport'         => 'refresh',
+    ] );
+    $wp_customize->add_control( 'navbar_cta_show', [
+        'label'   => 'Show CTA Button',
+        'section' => 'gm_sec_navbar_cta',
+        'type'    => 'checkbox',
+        'priority' => 5,
+    ] );
+
+
+    /* ──────────────────────────────────────────────────────────
        PANEL 0 — THEME COLORS
     ────────────────────────────────────────────────────────── */
     $wp_customize->add_panel( 'gm_panel_colors', [

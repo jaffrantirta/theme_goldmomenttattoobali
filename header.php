@@ -57,12 +57,23 @@
                 ] );
                 ?>
 
-                <!-- Book Now CTA — always visible regardless of menu -->
+                <!-- Navbar CTA Button (customizable via Appearance → Customize → Navbar CTA Button) -->
+                <?php
+                $cta_show = get_theme_mod( 'navbar_cta_show', '1' );
+                $cta_text = get_theme_mod( 'navbar_cta_text', 'Book Now' );
+                $cta_url  = get_theme_mod( 'navbar_cta_url',  '#book-now' );
+                $cta_icon = get_theme_mod( 'navbar_cta_icon', 'fa-solid fa-calendar-check' );
+                if ( $cta_show ) :
+                ?>
                 <div class="ms-lg-3 mt-3 mt-lg-0">
-                    <a class="btn-gold btn-gold-sm" href="#book-now" style="font-size:11px; padding:10px 22px; border-radius:3px;">
-                        <i class="fa-solid fa-calendar-check me-1"></i> Book Now
+                    <a class="btn-gold btn-gold-sm" href="<?php echo esc_url( $cta_url ); ?>" style="font-size:11px; padding:10px 22px; border-radius:3px;">
+                        <?php if ( $cta_icon ) : ?>
+                        <i class="<?php echo esc_attr( $cta_icon ); ?> me-1" aria-hidden="true"></i>
+                        <?php endif; ?>
+                        <?php echo esc_html( $cta_text ); ?>
                     </a>
                 </div>
+                <?php endif; ?>
 
             </div>
         </div>
