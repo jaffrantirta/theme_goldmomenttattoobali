@@ -264,9 +264,60 @@ p { color: #b0b0b0; }
 .navbar-toggler {
   border: 1px solid rgba(201, 168, 76, 0.4);
   padding: 6px 10px;
+  transition: border-color 0.3s ease;
 }
+.navbar-toggler:focus { box-shadow: none; outline: none; }
+.navbar-toggler:hover { border-color: rgba(201, 168, 76, 0.8); }
 .navbar-toggler-icon {
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28201, 168, 76, 0.9%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+/* ── Mobile menu — blur glass panel ─────────────────────── */
+@media (max-width: 991px) {
+  /* Navbar always has a dark base on mobile so toggler is always visible */
+  #main-navbar {
+    background: rgba(13, 13, 13, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  /* Open / animating collapse: full glass panel */
+  #main-navbar .navbar-collapse.show,
+  #main-navbar .navbar-collapse.collapsing {
+    background: rgba(13, 13, 13, 0.96);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border-top: 1px solid rgba(201, 168, 76, 0.15);
+    border-radius: 0 0 12px 12px;
+    margin: 12px -12px -18px;
+    padding: 8px 20px 24px;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+  }
+
+  /* Mobile nav links — stacked, bigger tap targets */
+  #main-navbar .navbar-nav .nav-link {
+    padding: 13px 8px !important;
+    font-size: 13px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  }
+  #main-navbar .navbar-nav .nav-item:last-child .nav-link {
+    border-bottom: none;
+  }
+
+  /* Underline indicator not needed on mobile */
+  #main-navbar .navbar-nav .nav-link::after { display: none; }
+
+  /* CTA button — full width on mobile */
+  #main-navbar .ms-lg-3 {
+    margin-top: 12px !important;
+    margin-left: 0 !important;
+    padding-bottom: 4px;
+  }
+  #main-navbar .btn-gold-sm {
+    display: block;
+    text-align: center;
+    width: 100%;
+  }
 }
 
 /* ================================================================

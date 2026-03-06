@@ -29,8 +29,11 @@
     var navbar = document.getElementById('main-navbar');
     if (!navbar) return;
 
+    // Inner pages (no #hero) always use the solid scrolled style
+    var isInnerPage = !document.getElementById('hero');
+
     function updateNavbar() {
-      if (window.scrollY > 60) {
+      if (isInnerPage || window.scrollY > 60) {
         navbar.classList.add('scrolled');
       } else {
         navbar.classList.remove('scrolled');
