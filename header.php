@@ -49,6 +49,7 @@
                 <?php
                 wp_nav_menu( [
                     'theme_location' => 'primary',
+                    'menu'           => 'primary', // also match by menu name if location not assigned
                     'menu_class'     => 'navbar-nav d-flex flex-column flex-lg-row align-items-lg-center gap-lg-1',
                     'container'      => false,
                     'walker'         => new Goldmoment_Walker_Nav_Menu(),
