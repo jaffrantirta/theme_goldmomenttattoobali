@@ -494,11 +494,23 @@ function goldmoment_customizer_register( WP_Customize_Manager $wp_customize ) {
     gm_textarea( $wp_customize, 'book_subtitle',        'Subtitle Paragraph',  'gm_sec_book_header',
         'Ready to wear your story? Chat with us on WhatsApp and our team will help you plan your perfect tattoo.', 40 );
 
-    /* 6-B: WhatsApp CTA Button ──────────────────────────────── */
-    $wp_customize->add_section( 'gm_sec_book_wa', [
-        'title'       => 'Book Now — WhatsApp Button',
+    /* 6-B: Embed Widget ─────────────────────────────────────── */
+    $wp_customize->add_section( 'gm_sec_book_embed', [
+        'title'       => 'Book Now — Embed Widget',
         'panel'       => 'gm_panel_book',
-        'description' => 'Customize the large WhatsApp CTA button.',
+        'description' => 'Paste an embed URL (e.g. Calendly, SimplyBook, Setmore) to display a booking widget inline. Leave blank to show the WhatsApp fallback button instead.',
+    ] );
+
+    gm_url(  $wp_customize, 'book_embed_url',    'Embed URL',           'gm_sec_book_embed', '',    10,
+        'e.g. https://calendly.com/youraccount' );
+    gm_text( $wp_customize, 'book_embed_height', 'Embed Height (px)',   'gm_sec_book_embed', '700', 20,
+        'Height of the embedded widget in pixels.' );
+
+    /* 6-C: WhatsApp Fallback ─────────────────────────────────── */
+    $wp_customize->add_section( 'gm_sec_book_wa', [
+        'title'       => 'Book Now — WhatsApp Fallback',
+        'panel'       => 'gm_panel_book',
+        'description' => 'Shown only when no Embed URL is set above.',
     ] );
 
     gm_text( $wp_customize, 'book_wa_btn_text', 'Button Label',          'gm_sec_book_wa', 'Chat on WhatsApp',                          10 );

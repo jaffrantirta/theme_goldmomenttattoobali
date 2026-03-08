@@ -153,12 +153,14 @@ foreach ( $step_defaults as $n => $def ) {
 }
 
 // ── Book Now ───────────────────────────────────────────────────
-$book_badge     = get_theme_mod( 'book_badge',           'Book Now' );
-$book_title     = get_theme_mod( 'book_title',           'Reserve Your' );
-$book_highlight = get_theme_mod( 'book_title_highlight', 'Gold Moment' );
-$book_subtitle  = get_theme_mod( 'book_subtitle',        'Ready to wear your story? Chat with us on WhatsApp and our team will help you plan your perfect tattoo.' );
-$book_wa_text   = get_theme_mod( 'book_wa_btn_text',     'Chat on WhatsApp' );
-$book_wa_sub    = get_theme_mod( 'book_wa_btn_sub',      'Usually replies within 1 hour · Free consultation' );
+$book_badge      = get_theme_mod( 'book_badge',           'Book Now' );
+$book_title      = get_theme_mod( 'book_title',           'Reserve Your' );
+$book_highlight  = get_theme_mod( 'book_title_highlight', 'Gold Moment' );
+$book_subtitle   = get_theme_mod( 'book_subtitle',        'Ready to wear your story? Chat with us on WhatsApp and our team will help you plan your perfect tattoo.' );
+$book_embed_url  = get_theme_mod( 'book_embed_url',       '' );
+$book_embed_h    = absint( get_theme_mod( 'book_embed_height', '700' ) ) ?: 700;
+$book_wa_text    = get_theme_mod( 'book_wa_btn_text',     'Chat on WhatsApp' );
+$book_wa_sub     = get_theme_mod( 'book_wa_btn_sub',      'Usually replies within 1 hour · Free consultation' );
 
 // ── Find Us ────────────────────────────────────────────────────
 $findus_badge     = get_theme_mod( 'findus_badge',           'Find Us' );
@@ -527,7 +529,21 @@ $social_fb  = get_theme_mod( 'social_facebook',  'https://www.facebook.com/goldm
             <p class="section-subtitle mb-5"><?php echo esc_html( $book_subtitle ); ?></p>
         </div>
 
-        <!-- WhatsApp CTA -->
+        <?php if ( $book_embed_url ) : ?>
+        <!-- Embedded Booking Widget -->
+        <div class="book-embed-wrap reveal delay-1">
+            <iframe
+                src="<?php echo esc_url( $book_embed_url ); ?>"
+                width="100%"
+                height="<?php echo esc_attr( $book_embed_h ); ?>"
+                frameborder="0"
+                scrolling="yes"
+                allow="payment"
+                loading="lazy"
+                style="border:none; border-radius:12px; background:transparent;"></iframe>
+        </div>
+        <?php else : ?>
+        <!-- WhatsApp CTA (fallback) -->
         <div class="book-wa-wrap reveal delay-1">
             <a href="<?php echo esc_url( $contact_wa_url ); ?>"
                target="_blank" rel="noopener noreferrer"
@@ -539,6 +555,7 @@ $social_fb  = get_theme_mod( 'social_facebook',  'https://www.facebook.com/goldm
             </a>
             <p class="book-wa-sub"><?php echo esc_html( $book_wa_sub ); ?></p>
         </div>
+        <?php endif; ?>
 
         <!-- Trust Badges -->
         <div class="d-flex flex-wrap justify-content-center gap-3 mt-5 reveal delay-2">
@@ -687,6 +704,17 @@ $social_fb  = get_theme_mod( 'social_facebook',  'https://www.facebook.com/goldm
     transform: translate(-50%,-50%);
     pointer-events: none;
 }
+
+/* Embed Widget */
+.book-embed-wrap {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.4);
+}
+.book-embed-wrap iframe { display: block; width: 100%; }
 
 /* WA Button */
 .book-wa-wrap { display: flex; flex-direction: column; align-items: center; }
