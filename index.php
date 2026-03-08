@@ -284,15 +284,15 @@ $social_fb  = get_theme_mod( 'social_facebook',  'https://www.facebook.com/goldm
             <p class="section-subtitle"><?php echo esc_html( $carousel_subtitle ); ?></p>
         </div>
 
-        <!-- Style filter tabs — customizable via Appearance > Customize > Portfolio Tabs -->
+        <!-- Style filter tabs — auto-generated from the Style Tag of each active card -->
         <div class="d-flex flex-wrap justify-content-center gap-2 mb-4 reveal delay-1">
             <?php
-            $carousel_filter_tabs = get_theme_mod(
-                'carousel_filter_tabs',
-                'All,Japanese,Blackwork,Realism,Geometric,Watercolor,Neo-Traditional,Fine Line'
-            );
-            $styles = array_filter( array_map( 'trim', explode( ',', $carousel_filter_tabs ) ) );
-            foreach ( array_values( $styles ) as $i => $style ) :
+            // Build unique tabs from the actual tags on active cards (always in sync)
+            $unique_tags = array_unique( array_map( 'trim', array_column( $tattoos, 'tag' ) ) );
+            sort( $unique_tags );
+            $tab_list = array_merge( [ 'All' ], $unique_tags );
+
+            foreach ( $tab_list as $i => $style ) :
             ?>
             <button class="gallery-filter-btn <?php echo $i === 0 ? 'active' : ''; ?>"
                     data-filter="<?php echo esc_attr( strtolower( $style ) ); ?>">

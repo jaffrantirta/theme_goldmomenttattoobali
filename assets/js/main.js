@@ -428,12 +428,12 @@
         filterBtns.forEach(function (b) { b.classList.remove('active'); });
         btn.classList.add('active');
 
-        var filter = btn.getAttribute('data-filter'); // e.g. 'all', 'japanese', 'blackwork'
+        var filter = (btn.getAttribute('data-filter') || '').trim().toLowerCase();
 
-        // Show / hide slides based on data-style
+        // Show / hide slides — match data-style against the tab's data-filter
         var slides = swiperEl.querySelectorAll('.swiper-slide');
         slides.forEach(function (slide) {
-          var style = slide.getAttribute('data-style') || '';
+          var style = (slide.getAttribute('data-style') || '').trim().toLowerCase();
           slide.style.display = (filter === 'all' || style === filter) ? '' : 'none';
         });
 
