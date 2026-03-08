@@ -273,11 +273,15 @@ $social_fb  = get_theme_mod( 'social_facebook',  'https://www.facebook.com/goldm
             <p class="section-subtitle"><?php echo esc_html( $carousel_subtitle ); ?></p>
         </div>
 
-        <!-- Style filter tabs -->
+        <!-- Style filter tabs — customizable via Appearance > Customize > Portfolio Tabs -->
         <div class="d-flex flex-wrap justify-content-center gap-2 mb-4 reveal delay-1">
             <?php
-            $styles = [ 'All', 'Japanese', 'Blackwork', 'Realism', 'Geometric', 'Watercolor', 'Neo-Traditional', 'Fine Line' ];
-            foreach ( $styles as $i => $style ) :
+            $carousel_filter_tabs = get_theme_mod(
+                'carousel_filter_tabs',
+                'All,Japanese,Blackwork,Realism,Geometric,Watercolor,Neo-Traditional,Fine Line'
+            );
+            $styles = array_filter( array_map( 'trim', explode( ',', $carousel_filter_tabs ) ) );
+            foreach ( array_values( $styles ) as $i => $style ) :
             ?>
             <button class="gallery-filter-btn <?php echo $i === 0 ? 'active' : ''; ?>"
                     data-filter="<?php echo esc_attr( strtolower( $style ) ); ?>">
@@ -294,7 +298,8 @@ $social_fb  = get_theme_mod( 'social_facebook',  'https://www.facebook.com/goldm
             <div class="swiper-wrapper">
 
                 <?php foreach ( $tattoos as $tattoo ) : ?>
-                <div class="swiper-slide" style="width: 280px;">
+                <div class="swiper-slide" style="width: 280px;"
+                     data-style="<?php echo esc_attr( strtolower( $tattoo['tag'] ) ); ?>">
                     <div class="tattoo-card">
                         <div class="tattoo-card-img">
                             <img src="<?php echo esc_url( $tattoo['img'] ); ?>"

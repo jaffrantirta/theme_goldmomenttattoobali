@@ -8,18 +8,21 @@
 (function () {
   'use strict';
 
+  /* ── Shared state ───────────────────────────────────────── */
+  var swiperInstance = null;
+
   /* ── DOM Ready ──────────────────────────────────────────── */
   document.addEventListener('DOMContentLoaded', function () {
     initNavbar();
     initHeroParallax();
     initSwiperCarousel();
+    initGalleryFilter();      // must run after initSwiperCarousel
     initGalleryLightbox();
     initScrollReveal();
     initCounterAnimation();
     initBookingForm();
     initBackToTop();
     initNavActiveLinks();
-    initGalleryFilter();
   });
 
   /* ================================================================
@@ -90,11 +93,11 @@
   function initSwiperCarousel() {
     if (typeof Swiper === 'undefined') return;
 
-    var swiper = new Swiper('#tattooSwiper', {
+    swiperInstance = new Swiper('#tattooSwiper', {
       slidesPerView: 1.2,
       spaceBetween: 16,
       centeredSlides: false,
-      loop: true,
+      loop: false,
       grabCursor: true,
       pagination: {
         el: '.swiper-pagination',
@@ -122,8 +125,8 @@
     // Pause autoplay on hover
     var container = document.getElementById('tattooSwiper');
     if (container) {
-      container.addEventListener('mouseenter', function () { swiper.autoplay.stop(); });
-      container.addEventListener('mouseleave', function () { swiper.autoplay.start(); });
+      container.addEventListener('mouseenter', function () { swiperInstance.autoplay.stop(); });
+      container.addEventListener('mouseleave', function () { swiperInstance.autoplay.start(); });
     }
   }
 
@@ -408,18 +411,37 @@
   }
 
   /* ================================================================
-     10. GALLERY FILTER (Style Tabs)
+     10. GALLERY FILTER (Portfolio Style Tabs)
+     Tabs are customizable via WP Customizer → "carousel_filter_tabs"
+     Each slide carries a data-style attribute matching the tattoo tag.
   ================================================================ */
   function initGalleryFilter() {
     var filterBtns = document.querySelectorAll('.gallery-filter-btn');
     if (!filterBtns.length) return;
 
+    var swiperEl = document.getElementById('tattooSwiper');
+    if (!swiperEl) return;
+
     filterBtns.forEach(function (btn) {
       btn.addEventListener('click', function () {
+        // Update active button
         filterBtns.forEach(function (b) { b.classList.remove('active'); });
         btn.classList.add('active');
-        // Note: with real WordPress posts, filter logic would target data attributes
-        // For now this is purely visual tab switching
+
+        var filter = btn.getAttribute('data-filter'); // e.g. 'all', 'japanese', 'blackwork'
+
+        // Show / hide slides based on data-style
+        var slides = swiperEl.querySelectorAll('.swiper-slide');
+        slides.forEach(function (slide) {
+          var style = slide.getAttribute('data-style') || '';
+          slide.style.display = (filter === 'all' || style === filter) ? '' : 'none';
+        });
+
+        // Reset to first visible slide and refresh layout
+        if (swiperInstance) {
+          swiperInstance.slideTo(0, 0);
+          swiperInstance.update();
+        }
       });
     });
   }
