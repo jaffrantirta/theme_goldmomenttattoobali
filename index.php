@@ -41,20 +41,31 @@ $carousel_highlight = get_theme_mod( 'carousel_title_highlight', 'Speaks' );
 $carousel_subtitle  = get_theme_mod( 'carousel_subtitle',        'Browse through our diverse portfolio of custom tattoo designs. Each piece is uniquely crafted to reflect your personal story and style.' );
 
 $carousel_defaults = [
-    1 => [ 'https://images.unsplash.com/photo-1542856391-010fb87dcfed?w=500&q=80',    'Japanese',        'Dragon Koi',      'by Ari Santoso', 'Traditional Japanese',   'A powerful koi dragon sleeve full of symbolism'    ],
-    2 => [ 'https://images.unsplash.com/photo-1568515045052-f9a854d70bfd?w=500&q=80', 'Blackwork',       'Sacred Geometry', 'by Maya Dewi',   'Blackwork Geometric',    'Intricate mandala patterns with bold black lines'  ],
-    3 => [ 'https://images.unsplash.com/photo-1559059699-d4a0b5c1b935?w=500&q=80',    'Realism',         'Portrait Art',    'by Dewa Putra',  'Photo Realism',          'Hyper-realistic portraits captured in ink forever' ],
-    4 => [ 'https://images.unsplash.com/photo-1611501275019-9b5cda994e8d?w=500&q=80', 'Fine Line',       'Floral Minimal',  'by Sari Putri',  'Fine Line Botanical',    'Delicate florals drawn with hair-thin precision'   ],
-    5 => [ 'https://images.unsplash.com/photo-1598371839696-5c5bb00bdc28?w=500&q=80', 'Neo-Traditional', 'Tiger Spirit',    'by Bima Arya',   'Neo-Traditional',        'Bold neo-trad tiger with vibrant gold highlights'  ],
-    6 => [ 'https://images.unsplash.com/photo-1590246814883-57c511e76523?w=500&q=80', 'Watercolor',      'Ocean Dream',     'by Maya Dewi',   'Watercolor Abstract',    'Flowing colors that bleed like watercolor paint'   ],
-    7 => [ 'https://images.unsplash.com/photo-1552074284-5e84b8e7b7e8?w=500&q=80',    'Geometric',       'Cosmic Web',      'by Ari Santoso', 'Dotwork Geometric',      'Sacred geometry meets celestial dotwork artistry'  ],
-    8 => [ 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=500&q=80', 'Japanese',        'Bali Lotus',      'by Dewa Putra',  'Balinese Japanese',      'Fusion of Balinese art and Japanese tattooing'     ],
+    // ── Pre-filled items 1–8 ──────────────────────────────────
+    1  => [ 'https://images.unsplash.com/photo-1542856391-010fb87dcfed?w=500&q=80',    'Japanese',        'Dragon Koi',      'by Ari Santoso', 'Traditional Japanese',   'A powerful koi dragon sleeve full of symbolism'    ],
+    2  => [ 'https://images.unsplash.com/photo-1568515045052-f9a854d70bfd?w=500&q=80', 'Blackwork',       'Sacred Geometry', 'by Maya Dewi',   'Blackwork Geometric',    'Intricate mandala patterns with bold black lines'  ],
+    3  => [ 'https://images.unsplash.com/photo-1559059699-d4a0b5c1b935?w=500&q=80',    'Realism',         'Portrait Art',    'by Dewa Putra',  'Photo Realism',          'Hyper-realistic portraits captured in ink forever' ],
+    4  => [ 'https://images.unsplash.com/photo-1611501275019-9b5cda994e8d?w=500&q=80', 'Fine Line',       'Floral Minimal',  'by Sari Putri',  'Fine Line Botanical',    'Delicate florals drawn with hair-thin precision'   ],
+    5  => [ 'https://images.unsplash.com/photo-1598371839696-5c5bb00bdc28?w=500&q=80', 'Neo-Traditional', 'Tiger Spirit',    'by Bima Arya',   'Neo-Traditional',        'Bold neo-trad tiger with vibrant gold highlights'  ],
+    6  => [ 'https://images.unsplash.com/photo-1590246814883-57c511e76523?w=500&q=80', 'Watercolor',      'Ocean Dream',     'by Maya Dewi',   'Watercolor Abstract',    'Flowing colors that bleed like watercolor paint'   ],
+    7  => [ 'https://images.unsplash.com/photo-1552074284-5e84b8e7b7e8?w=500&q=80',    'Geometric',       'Cosmic Web',      'by Ari Santoso', 'Dotwork Geometric',      'Sacred geometry meets celestial dotwork artistry'  ],
+    8  => [ 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=500&q=80', 'Japanese',        'Bali Lotus',      'by Dewa Putra',  'Balinese Japanese',      'Fusion of Balinese art and Japanese tattooing'     ],
+    // ── Extra slots 9–15 — set image via Customizer to activate ─
+    9  => [ '', 'Japanese',        'Portfolio #9',  'by Artist',  'Japanese',        '' ],
+    10 => [ '', 'Blackwork',       'Portfolio #10', 'by Artist',  'Blackwork',       '' ],
+    11 => [ '', 'Realism',         'Portfolio #11', 'by Artist',  'Realism',         '' ],
+    12 => [ '', 'Fine Line',       'Portfolio #12', 'by Artist',  'Fine Line',       '' ],
+    13 => [ '', 'Neo-Traditional', 'Portfolio #13', 'by Artist',  'Neo-Traditional', '' ],
+    14 => [ '', 'Watercolor',      'Portfolio #14', 'by Artist',  'Watercolor',      '' ],
+    15 => [ '', 'Geometric',       'Portfolio #15', 'by Artist',  'Geometric',       '' ],
 ];
 
 $tattoos = [];
 foreach ( $carousel_defaults as $n => $def ) {
+    $img = get_theme_mod( "tattoo_{$n}_img", $def[0] );
+    if ( empty( trim( $img ) ) ) continue; // skip if no image set
     $tattoos[] = [
-        'img'    => get_theme_mod( "tattoo_{$n}_img",    $def[0] ),
+        'img'    => $img,
         'tag'    => get_theme_mod( "tattoo_{$n}_tag",    $def[1] ),
         'name'   => get_theme_mod( "tattoo_{$n}_name",   $def[2] ),
         'artist' => get_theme_mod( "tattoo_{$n}_artist", $def[3] ),
