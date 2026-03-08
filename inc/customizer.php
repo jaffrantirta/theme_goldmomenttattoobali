@@ -586,46 +586,42 @@ function goldmoment_customizer_register( WP_Customize_Manager $wp_customize ) {
         'https://www.instagram.com/goldmomenttattoo.bali', 50, 'Link for the Instagram button below the gallery' );
     gm_text( $wp_customize, 'gallery_page_ig_btn', '"Instagram" Button Label', 'gm_sec_gp_header', 'Follow on Instagram', 60 );
 
-    /* 8-B: Gallery Items (1–24) ─────────────────────────────── */
+    /* 8-B: Gallery Items (1–50) ─────────────────────────────── */
     $wp_customize->add_section( 'gm_sec_gp_items', [
-        'title'       => 'Gallery Page — Images (1–24)',
+        'title'       => 'Gallery Page — Images (1–50)',
         'panel'       => 'gm_panel_gallery_page',
-        'description' => 'Upload up to 24 images. Each item needs at least an image to appear. The Style field is used for the filter tabs (e.g. Japanese, Blackwork, Realism, Fine Line, Geometric, Watercolor, Neo-Traditional, Tribal).',
+        'description' => 'Upload up to 50 images. Items 1–8 are pre-filled. Leave Image blank to hide any slot. The Style field drives the filter tabs automatically.',
     ] );
 
     $gp_item_defaults = [
-        1  => [ 'https://images.unsplash.com/photo-1542856391-010fb87dcfed?w=800&q=85',   'Japanese Sleeve',      'Japanese'       ],
-        2  => [ 'https://images.unsplash.com/photo-1568515045052-f9a854d70bfd?w=600&q=80', 'Geometric Mandala',    'Geometric'      ],
-        3  => [ 'https://images.unsplash.com/photo-1559059699-d4a0b5c1b935?w=600&q=80',   'Portrait Realism',     'Realism'        ],
-        4  => [ 'https://images.unsplash.com/photo-1611501275019-9b5cda994e8d?w=600&q=80', 'Fine Line Floral',     'Fine Line'      ],
-        5  => [ 'https://images.unsplash.com/photo-1590246814883-57c511e76523?w=600&q=80', 'Watercolor Splash',    'Watercolor'     ],
-        6  => [ 'https://images.unsplash.com/photo-1598371839696-5c5bb00bdc28?w=800&q=85', 'Neo-Traditional Tiger','Neo-Traditional'],
-        7  => [ 'https://images.unsplash.com/photo-1552074284-5e84b8e7b7e8?w=600&q=80',   'Dotwork Cosmic',       'Geometric'      ],
-        8  => [ 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=600&q=80', 'Bali Lotus',           'Japanese'       ],
-        9  => [ '', '', '' ],
-        10 => [ '', '', '' ],
-        11 => [ '', '', '' ],
-        12 => [ '', '', '' ],
-        13 => [ '', '', '' ],
-        14 => [ '', '', '' ],
-        15 => [ '', '', '' ],
-        16 => [ '', '', '' ],
-        17 => [ '', '', '' ],
-        18 => [ '', '', '' ],
-        19 => [ '', '', '' ],
-        20 => [ '', '', '' ],
-        21 => [ '', '', '' ],
-        22 => [ '', '', '' ],
-        23 => [ '', '', '' ],
-        24 => [ '', '', '' ],
+        // Pre-filled 1–8
+        1  => [ 'https://images.unsplash.com/photo-1542856391-010fb87dcfed?w=800&q=85',   'Japanese Sleeve',       'Japanese'        ],
+        2  => [ 'https://images.unsplash.com/photo-1568515045052-f9a854d70bfd?w=600&q=80', 'Geometric Mandala',     'Geometric'       ],
+        3  => [ 'https://images.unsplash.com/photo-1559059699-d4a0b5c1b935?w=600&q=80',   'Portrait Realism',      'Realism'         ],
+        4  => [ 'https://images.unsplash.com/photo-1611501275019-9b5cda994e8d?w=600&q=80', 'Fine Line Floral',      'Fine Line'       ],
+        5  => [ 'https://images.unsplash.com/photo-1590246814883-57c511e76523?w=600&q=80', 'Watercolor Splash',     'Watercolor'      ],
+        6  => [ 'https://images.unsplash.com/photo-1598371839696-5c5bb00bdc28?w=800&q=85', 'Neo-Traditional Tiger', 'Neo-Traditional' ],
+        7  => [ 'https://images.unsplash.com/photo-1552074284-5e84b8e7b7e8?w=600&q=80',   'Dotwork Cosmic',        'Geometric'       ],
+        8  => [ 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=600&q=80', 'Bali Lotus',            'Japanese'        ],
+        // Empty slots 9–50
+        9  => [ '', '', '' ], 10 => [ '', '', '' ], 11 => [ '', '', '' ], 12 => [ '', '', '' ],
+        13 => [ '', '', '' ], 14 => [ '', '', '' ], 15 => [ '', '', '' ], 16 => [ '', '', '' ],
+        17 => [ '', '', '' ], 18 => [ '', '', '' ], 19 => [ '', '', '' ], 20 => [ '', '', '' ],
+        21 => [ '', '', '' ], 22 => [ '', '', '' ], 23 => [ '', '', '' ], 24 => [ '', '', '' ],
+        25 => [ '', '', '' ], 26 => [ '', '', '' ], 27 => [ '', '', '' ], 28 => [ '', '', '' ],
+        29 => [ '', '', '' ], 30 => [ '', '', '' ], 31 => [ '', '', '' ], 32 => [ '', '', '' ],
+        33 => [ '', '', '' ], 34 => [ '', '', '' ], 35 => [ '', '', '' ], 36 => [ '', '', '' ],
+        37 => [ '', '', '' ], 38 => [ '', '', '' ], 39 => [ '', '', '' ], 40 => [ '', '', '' ],
+        41 => [ '', '', '' ], 42 => [ '', '', '' ], 43 => [ '', '', '' ], 44 => [ '', '', '' ],
+        45 => [ '', '', '' ], 46 => [ '', '', '' ], 47 => [ '', '', '' ], 48 => [ '', '', '' ],
+        49 => [ '', '', '' ], 50 => [ '', '', '' ],
     ];
 
     foreach ( $gp_item_defaults as $n => $def ) {
         $p = $n * 15;
-        gm_image( $wp_customize, "gallery_page_item_{$n}_img",   "Item {$n} — Image",      'gm_sec_gp_items', $def[0], $p,     "Gallery page item {$n} photo" );
-        gm_text(  $wp_customize, "gallery_page_item_{$n}_label", "Item {$n} — Label",      'gm_sec_gp_items', $def[1], $p + 5, 'Shown on hover (e.g. Japanese Sleeve)' );
-        gm_text(  $wp_customize, "gallery_page_item_{$n}_style", "Item {$n} — Style (filter tab)", 'gm_sec_gp_items', $def[2], $p + 10,
-            'Exact style name used for filter tabs (e.g. Japanese, Blackwork, Realism, Fine Line, Geometric, Watercolor, Neo-Traditional, Tribal)' );
+        gm_image( $wp_customize, "gallery_page_item_{$n}_img",   "Item {$n} — Image",             'gm_sec_gp_items', $def[0], $p,      $n >= 9 ? "Upload image to activate slot {$n}" : "Gallery page item {$n} photo" );
+        gm_text(  $wp_customize, "gallery_page_item_{$n}_label", "Item {$n} — Label",             'gm_sec_gp_items', $def[1], $p + 5,  'Shown on hover, e.g. Japanese Sleeve' );
+        gm_text(  $wp_customize, "gallery_page_item_{$n}_style", "Item {$n} — Style (filter tab)",'gm_sec_gp_items', $def[2], $p + 10, 'Drives the filter tabs, e.g. Japanese, Blackwork, Realism, Fine Line, Geometric, Watercolor, Neo-Traditional, Tribal' );
     }
 
 

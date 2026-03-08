@@ -18,9 +18,9 @@ $gp_ig_url    = get_theme_mod( 'gallery_page_ig_url',    'https://www.instagram.
 $gp_ig_btn    = get_theme_mod( 'gallery_page_ig_btn',    'Follow on Instagram' );
 $gp_wa_url    = get_theme_mod( 'contact_wa_url',         'https://wa.me/6281234567890' );
 
-// ── Collect Gallery Items (up to 24) ──────────────────────────
+// ── Collect Gallery Items (up to 50) ──────────────────────────
 $gallery_items = [];
-for ( $i = 1; $i <= 24; $i++ ) {
+for ( $i = 1; $i <= 50; $i++ ) {
     $img   = get_theme_mod( "gallery_page_item_{$i}_img",   '' );
     $label = get_theme_mod( "gallery_page_item_{$i}_label", '' );
     $style = get_theme_mod( "gallery_page_item_{$i}_style", '' );
