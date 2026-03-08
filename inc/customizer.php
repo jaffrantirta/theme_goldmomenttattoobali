@@ -278,32 +278,58 @@ function goldmoment_customizer_register( WP_Customize_Manager $wp_customize ) {
     gm_textarea( $wp_customize, 'carousel_subtitle',    'Subtitle Paragraph',  'gm_sec_carousel_header',
         'Browse through our diverse portfolio of custom tattoo designs. Each piece is uniquely crafted to reflect your personal story and style.', 40 );
 
-    /* 2-B: Tattoo Cards ─────────────────────────────────────── */
-    $wp_customize->add_section( 'gm_sec_carousel_items', [
-        'title'       => 'Carousel — Portfolio Cards',
+    /* 2-B: Filter Tabs ──────────────────────────────────────── */
+    $wp_customize->add_section( 'gm_sec_carousel_tabs', [
+        'title'       => 'Carousel — Filter Tabs',
         'panel'       => 'gm_panel_carousel',
-        'description' => 'Edit the 8 portfolio cards shown in the carousel.',
+        'description' => 'Comma-separated list of style tabs shown above the carousel. The first item is always "All". Must match the Style Tag values of your cards.',
+    ] );
+
+    gm_text(
+        $wp_customize,
+        'carousel_filter_tabs',
+        'Filter Tab Labels',
+        'gm_sec_carousel_tabs',
+        'All,Japanese,Blackwork,Realism,Geometric,Watercolor,Neo-Traditional,Fine Line',
+        10,
+        'Comma-separated. Example: All,Japanese,Blackwork,Realism,Fine Line'
+    );
+
+    /* 2-C: Tattoo Cards ─────────────────────────────────────── */
+    $wp_customize->add_section( 'gm_sec_carousel_items', [
+        'title'       => 'Carousel — Portfolio Cards (1–15)',
+        'panel'       => 'gm_panel_carousel',
+        'description' => 'Cards 1–8 are pre-filled. Cards 9–15 are hidden until you upload an image. Leave Image blank to hide a card.',
     ] );
 
     $carousel_defaults = [
-        1 => [ 'https://images.unsplash.com/photo-1542856391-010fb87dcfed?w=500&q=80', 'Japanese',       'Dragon Koi',      'by Ari Santoso',  'Traditional Japanese',   'A powerful koi dragon sleeve full of symbolism'    ],
-        2 => [ 'https://images.unsplash.com/photo-1568515045052-f9a854d70bfd?w=500&q=80', 'Blackwork',   'Sacred Geometry', 'by Maya Dewi',    'Blackwork Geometric',    'Intricate mandala patterns with bold black lines'  ],
-        3 => [ 'https://images.unsplash.com/photo-1559059699-d4a0b5c1b935?w=500&q=80', 'Realism',        'Portrait Art',    'by Dewa Putra',   'Photo Realism',          'Hyper-realistic portraits captured in ink forever' ],
-        4 => [ 'https://images.unsplash.com/photo-1611501275019-9b5cda994e8d?w=500&q=80', 'Fine Line',   'Floral Minimal',  'by Sari Putri',   'Fine Line Botanical',    'Delicate florals drawn with hair-thin precision'   ],
-        5 => [ 'https://images.unsplash.com/photo-1598371839696-5c5bb00bdc28?w=500&q=80', 'Neo-Traditional', 'Tiger Spirit', 'by Bima Arya',   'Neo-Traditional',        'Bold neo-trad tiger with vibrant gold highlights'  ],
-        6 => [ 'https://images.unsplash.com/photo-1590246814883-57c511e76523?w=500&q=80', 'Watercolor',  'Ocean Dream',     'by Maya Dewi',    'Watercolor Abstract',    'Flowing colors that bleed like watercolor paint'   ],
-        7 => [ 'https://images.unsplash.com/photo-1552074284-5e84b8e7b7e8?w=500&q=80', 'Geometric',      'Cosmic Web',      'by Ari Santoso',  'Dotwork Geometric',      'Sacred geometry meets celestial dotwork artistry'  ],
-        8 => [ 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=500&q=80', 'Japanese',    'Bali Lotus',      'by Dewa Putra',   'Balinese Japanese',      'Fusion of Balinese art and Japanese tattooing'     ],
+        // Pre-filled 1–8
+        1  => [ 'https://images.unsplash.com/photo-1542856391-010fb87dcfed?w=500&q=80',    'Japanese',        'Dragon Koi',      'by Ari Santoso', 'Traditional Japanese',   'A powerful koi dragon sleeve full of symbolism'    ],
+        2  => [ 'https://images.unsplash.com/photo-1568515045052-f9a854d70bfd?w=500&q=80', 'Blackwork',       'Sacred Geometry', 'by Maya Dewi',   'Blackwork Geometric',    'Intricate mandala patterns with bold black lines'  ],
+        3  => [ 'https://images.unsplash.com/photo-1559059699-d4a0b5c1b935?w=500&q=80',    'Realism',         'Portrait Art',    'by Dewa Putra',  'Photo Realism',          'Hyper-realistic portraits captured in ink forever' ],
+        4  => [ 'https://images.unsplash.com/photo-1611501275019-9b5cda994e8d?w=500&q=80', 'Fine Line',       'Floral Minimal',  'by Sari Putri',  'Fine Line Botanical',    'Delicate florals drawn with hair-thin precision'   ],
+        5  => [ 'https://images.unsplash.com/photo-1598371839696-5c5bb00bdc28?w=500&q=80', 'Neo-Traditional', 'Tiger Spirit',    'by Bima Arya',   'Neo-Traditional',        'Bold neo-trad tiger with vibrant gold highlights'  ],
+        6  => [ 'https://images.unsplash.com/photo-1590246814883-57c511e76523?w=500&q=80', 'Watercolor',      'Ocean Dream',     'by Maya Dewi',   'Watercolor Abstract',    'Flowing colors that bleed like watercolor paint'   ],
+        7  => [ 'https://images.unsplash.com/photo-1552074284-5e84b8e7b7e8?w=500&q=80',    'Geometric',       'Cosmic Web',      'by Ari Santoso', 'Dotwork Geometric',      'Sacred geometry meets celestial dotwork artistry'  ],
+        8  => [ 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=500&q=80', 'Japanese',        'Bali Lotus',      'by Dewa Putra',  'Balinese Japanese',      'Fusion of Balinese art and Japanese tattooing'     ],
+        // Extra slots 9–15 — hidden until image is set
+        9  => [ '', 'Japanese',        'Portfolio #9',  'by Artist', 'Japanese',        '' ],
+        10 => [ '', 'Blackwork',       'Portfolio #10', 'by Artist', 'Blackwork',       '' ],
+        11 => [ '', 'Realism',         'Portfolio #11', 'by Artist', 'Realism',         '' ],
+        12 => [ '', 'Fine Line',       'Portfolio #12', 'by Artist', 'Fine Line',       '' ],
+        13 => [ '', 'Neo-Traditional', 'Portfolio #13', 'by Artist', 'Neo-Traditional', '' ],
+        14 => [ '', 'Watercolor',      'Portfolio #14', 'by Artist', 'Watercolor',      '' ],
+        15 => [ '', 'Geometric',       'Portfolio #15', 'by Artist', 'Geometric',       '' ],
     ];
 
     foreach ( $carousel_defaults as $n => $def ) {
         $p = $n * 10;
-        gm_image(    $wp_customize, "tattoo_{$n}_img",    "Card {$n} — Image",          'gm_sec_carousel_items', $def[0], $p,      "Portfolio card {$n} image" );
-        gm_text(     $wp_customize, "tattoo_{$n}_tag",    "Card {$n} — Style Tag",      'gm_sec_carousel_items', $def[1], $p + 1 );
-        gm_text(     $wp_customize, "tattoo_{$n}_name",   "Card {$n} — Piece Name",     'gm_sec_carousel_items', $def[2], $p + 2 );
-        gm_text(     $wp_customize, "tattoo_{$n}_artist", "Card {$n} — Artist",         'gm_sec_carousel_items', $def[3], $p + 3 );
-        gm_text(     $wp_customize, "tattoo_{$n}_style",  "Card {$n} — Style (hover)",  'gm_sec_carousel_items', $def[4], $p + 4 );
-        gm_textarea( $wp_customize, "tattoo_{$n}_desc",   "Card {$n} — Description",    'gm_sec_carousel_items', $def[5], $p + 5 );
+        gm_image(    $wp_customize, "tattoo_{$n}_img",    "Card {$n} — Image",                  'gm_sec_carousel_items', $def[0], $p,      $n >= 9 ? "Upload image to activate card {$n}" : "Portfolio card {$n} image" );
+        gm_text(     $wp_customize, "tattoo_{$n}_tag",    "Card {$n} — Style Tag (filter)",      'gm_sec_carousel_items', $def[1], $p + 1, 'Must match a filter tab label, e.g. Japanese' );
+        gm_text(     $wp_customize, "tattoo_{$n}_name",   "Card {$n} — Piece Name",              'gm_sec_carousel_items', $def[2], $p + 2 );
+        gm_text(     $wp_customize, "tattoo_{$n}_artist", "Card {$n} — Artist",                  'gm_sec_carousel_items', $def[3], $p + 3 );
+        gm_text(     $wp_customize, "tattoo_{$n}_style",  "Card {$n} — Style Label (on hover)",  'gm_sec_carousel_items', $def[4], $p + 4 );
+        gm_textarea( $wp_customize, "tattoo_{$n}_desc",   "Card {$n} — Description (on hover)",  'gm_sec_carousel_items', $def[5], $p + 5 );
     }
 
 
