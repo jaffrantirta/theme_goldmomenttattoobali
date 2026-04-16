@@ -160,7 +160,7 @@ $hours_sun     = get_theme_mod( 'hours_sunday',   'By Appointment Only' );
             </p>
 
             <div class="d-flex gap-3 flex-wrap">
-                <a href="#" style="font-size:11px;color:#444;letter-spacing:0.1em;text-transform:uppercase;"
+                <a href="<?php echo esc_url( home_url( '/privacy-policy' ) ); ?>" style="font-size:11px;color:#444;letter-spacing:0.1em;text-transform:uppercase;"
                    onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='#444'">Privacy Policy</a>
                 <a href="#" style="font-size:11px;color:#444;letter-spacing:0.1em;text-transform:uppercase;"
                    onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='#444'">Terms of Service</a>
